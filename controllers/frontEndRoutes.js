@@ -14,6 +14,10 @@ router.get("/",(req,res)=>{
         })
     })
 })
+
+router.get("/sessions",(req,res)=>{
+    res.json(req.session)
+})
 router.get("/project/:id",(req,res)=>{
     Project.findByPk(req.params.id,{
         include:[User]
@@ -24,6 +28,26 @@ router.get("/project/:id",(req,res)=>{
         console.log(projectHbsData)
 
         res.render("proj-details",projectHbsData)
+    })
+})
+
+router.get("/login",(req,res)=>{
+    if(req.session.logged_in){
+        return res.redirect("/profile")
+    }
+    res.render("login")
+})
+
+router.get("/profile",(req,res)=>{
+    if(!req.session.logged_in){
+        return res.redirect("/login")
+    }
+    User.findByPk(req.session.user_id,{
+        include:[Project]
+    }).then(userData=>{
+        const hbsData = userData.toJSON();
+        console.log(hbsData)
+        res.render("profile",hbsData)
     })
 })
 

@@ -1,0 +1,20 @@
+<h1>This is my profile page! Welcome back, {{name}}</h1>
+<h2>My Projects:</h2>
+{{#each projects}}
+    <div class="card">
+        <a href="/project/{{id}}"><h3>{{name}}</h3></a>
+        <h4>Needs: ${{needed_funding}}</h4>
+        <p>{{description}}</p>
+        <button class="delBtn" data-projId="{{id}}">Delete Me</button>
+        <hr>
+    </div>
+{{/each}}
+<h2>Add a project!</h2>
+<form action="" id="addProject">
+    <input type="text" name="projectName" id="projectName" placeholder="projectName">
+    <input type="text" name="projectDescription" id="projectDescription" placeholder="projectDescription">
+    <input type="number" name="projectFunding" id="projectFunding" >
+    <button>Add Project!</button>
+</form>
+
+<script src="/js/profile.js"></script>

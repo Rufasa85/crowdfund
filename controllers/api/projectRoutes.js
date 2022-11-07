@@ -2,6 +2,9 @@ const router = require('express').Router();
 const { Project } = require('../../models');
 
 router.post('/', async (req, res) => {
+  if(!req.session.logged_in){
+    return res.status(401).json({msg:"login first joetato!"})
+  }
   try {
     const newProject = await Project.create({
       ...req.body,
@@ -15,6 +18,9 @@ router.post('/', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
+  if(!req.session.logged_in){
+    return res.status(401).json({msg:"login first joetato!"})
+  }
   try {
     const projectData = await Project.destroy({
       where: {
