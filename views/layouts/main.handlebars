@@ -10,9 +10,13 @@
 <body>
     <header>
         <a href="/">Home</a>
+        {{#if logged_in}}
         <a href="/profile">Profile</a>
+        <button id ="logoutBtn">logout</button>
+        {{else}}
         <a href="/login">Login</a>
-       <button id ="logoutBtn">logout</button>
+        {{/if}}
+       
     </header>
     <main>
         {{{body}}}

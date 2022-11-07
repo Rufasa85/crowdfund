@@ -10,7 +10,8 @@ router.get("/",(req,res)=>{
         console.log(projectsHbsData)
 
         res.render("home",{
-            projects:projectsHbsData
+            projects:projectsHbsData,
+            logged_in:req.session.logged_in
         })
     })
 })
@@ -26,7 +27,7 @@ router.get("/project/:id",(req,res)=>{
         console.log(project);
         console.log("==============")
         console.log(projectHbsData)
-
+        projectHbsData.logged_in=req.session.logged_in
         res.render("proj-details",projectHbsData)
     })
 })
@@ -47,6 +48,7 @@ router.get("/profile",(req,res)=>{
     }).then(userData=>{
         const hbsData = userData.toJSON();
         console.log(hbsData)
+        hbsData.logged_in=req.session.logged_in
         res.render("profile",hbsData)
     })
 })
